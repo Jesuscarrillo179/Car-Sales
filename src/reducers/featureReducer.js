@@ -18,23 +18,18 @@ export const initialState = {
   export const featureReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_FEATURE' :
-            return {
-                ...state,
-                additionalFeatures: state.additionalFeatures.map
-            }
+          return {
+            ...state,
+            additionalPrice: state.additionalPrice + action.payload.price,
+            car:{...state.car, features: [...state.car.features, action.payload]}
+          }
+        case 'REMOVE_FEATURE' :
+        return {
+          ...state,
+          additionalPrice: state.additionalPrice - action.payload.price,
+          car:{...state.car, features:state.car.features.filter(item => item.id !== action.payload.id)}
+        }
         default:
-            return state;
-    }
-    // switch (action.type) {
-    //     case 'REMOVE_FEATURE' :
-    //         return {}
-    // }
-    // switch (action.type) {
-    //     case 'TOTAL_PRICE' :
-    //         return {}
-    // }
-    // switch (action.type) {
-    //     case '' :
-    //         return {}
-    // }
+          return state;
+     }
   }
